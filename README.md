@@ -85,28 +85,27 @@ By structuring the data transformation in layers and standardizing formats, the 
 
 ### Step 3: Data Ingestion
 - Create linked services and self-hosted integration runtime in ADF
+- Store sensitive information as secrets in Key Vault and create a Linked Service pointing to the key vault in ADF
 - Build pipelines to copy data from SQL Server to ADLS (Bronze layer)
 
 ### Step 4: Data Transformation
-- Mount ADLS to Azure Databricks using service principal credentials stored in Key Vault
+- Give Storage Blob Data Contributer permission to Unity Catalog Access Connector for databricks
+- Create credentials and external locations pointing to ADLS containers
 - Create Databricks notebooks to:
   - Bronze ➝ Silver: Clean and standardize raw data
-  - Silver ➝ Gold: Aggregate and model business-ready data
+  - Silver ➝ Gold: Model business-ready data
 
 ### Step 5: Data Loading & Reporting
-- Load Gold layer data into Synapse SQL Pools
+- Create a stored procedure that dynamically creates a view for the tables in Gold Layer
+- Create a pipeline that gets the metadata (tablenames) and for each tablename execute the stored procedure.
 - Connect Power BI to Synapse
 - Design reports and visuals using the Chinook schema and data model
 
 ### Step 6: Automation & Monitoring
 - Configure daily triggers in ADF for pipeline execution
-- Use Monitoring dashboards in ADF and Synapse to track performance
+- Publish Power BI dashboard and set up refresh schedules
 
-### Step 7: Security & Governance
-- Use Azure Key Vault to store connection strings and secrets
-- Apply RBAC policies via Azure Entra ID to restrict access
-
-### Step 8: End-to-End Testing
+### Step 7: End-to-End Testing
 - Insert test records in SQL Server
 - Manually trigger ADF pipeline or wait for the scheduled run
 - Verify updates flow from Bronze to Gold
@@ -116,4 +115,4 @@ By structuring the data transformation in layers and standardizing formats, the 
 
 ## Conclusion
 
-This project demonstrates a scalable, secure, and automated data pipeline that converts raw sales data from the Chinook database into meaningful insights through Power BI. By leveraging the Azure ecosystem, it ensures real-time, role-based access to high-quality analytics for business stakeholders.
+This project demonstrates a scalable, secure, and automated data pipeline that converts raw sales data from the Chinook database into meaningful insights through Azure services and Power BI. It helps stakeholders understand product performance by providing an informative dashboard with sales information and analytics. 
