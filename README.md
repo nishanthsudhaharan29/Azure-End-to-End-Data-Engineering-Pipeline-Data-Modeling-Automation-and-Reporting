@@ -1,5 +1,4 @@
 ## Azure End-to-End Data Engineering Pipeline: Data Modeling, Automation, and Reporting
-# Chinook Music Store Analytics: Azure Data Engineering Pipeline & Power BI Report
 
 ## Project Description
 
