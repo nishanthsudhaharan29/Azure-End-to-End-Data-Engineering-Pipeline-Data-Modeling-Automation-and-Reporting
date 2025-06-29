@@ -9,10 +9,9 @@ This project implements a modern Azure-based data engineering and analytics pipe
 - Clean, structured medallion architecture (Bronze, Silver, Gold)
 - Dynamic Power BI dashboard with metrics like revenue, top artists, track sales, and preferred media types
 - Secure and scalable infrastructure with automated daily refreshes
-- Data model and relationships designed in Power BI
+- Data model and relationships design
 
 ---
-
 ## Value to Business
 
 This solution provides data-driven insights into digital music sales, helping stakeholders:
@@ -21,7 +20,7 @@ This solution provides data-driven insights into digital music sales, helping st
 - Make informed business and marketing decisions
 - Reduce manual reporting via automation
 
-By structuring the data transformation in layers and standardizing formats, the data becomes highly usable and trustworthy, enabling real-time analysis through Power BI.
+By structuring the data transformation in layers and standardizing formats, the data becomes highly usable and trustworthy, enabling real-time analysis through Power BI or any analytical platforms.
 
 ---
 
@@ -36,9 +35,10 @@ By structuring the data transformation in layers and standardizing formats, the 
    - Transformed data is written to the Silver and Gold layers in ADLS.
 
 3. **Data Loading & Reporting**  
-   - Gold layer data is loaded into Azure Synapse Analytics for fast querying.
-   - Power BI is connected to Synapse to build dynamic dashboards.
-   - A custom data model and relationships were built in Power BI using the Chinook schema.
+   - Views are created for each table in the Gold ADLS using Synapse Analytics.
+   - Power BI is connected to Synapse to build synamic dashboard.
+   - The data model and the entity relationships are established.
+   
 
 4. **Automation & Monitoring**  
    - ADF triggers execute pipelines daily.
@@ -50,34 +50,18 @@ By structuring the data transformation in layers and standardizing formats, the 
 
 ---
 
-## Power BI Dashboard Overview
+## Services Used and Why
 
-The Power BI dashboard offers interactive views including:
-- Total revenue and track sales
-- Top artists by revenue
-- Genre and media type preferences
-- Playlist performance by quantity and revenue
-- Regional breakdown of orders
-- Year-over-year total order trends
-
-The data model for the dashboard was created manually in Power BI and follows the Chinook database schema, ensuring relational integrity.
-
-![Dashboard Preview](./images/chinook_dashboard.png)
-
-![Data Model](./images/chinook_datamodel.png)
-
----
-
-## Technology Stack
-
-- **SQL Server (On-Premises):** Source database (Chinook)
-- **Azure Data Factory (ADF):** Data pipeline orchestration
-- **Azure Data Lake Storage (ADLS):** Hierarchical data storage
-- **Azure Databricks:** Data cleaning and transformation
-- **Azure Synapse Analytics:** Data warehousing and analytics layer
-- **Power BI:** Dashboarding and reporting
-- **Azure Key Vault:** Secrets and credential management
-- **Azure Entra ID:** Identity and access management
+| Azure Service              | Purpose                                                                                   |
+|---------------------------|-------------------------------------------------------------------------------------------|
+| **SQL Server (On-Premises)** | Source system hosting the Chinook Music Store database. |
+| **Azure Data Factory (ADF)** | Orchestrates and automates the ETL process, moving data from SQL Server to Azure Data Lake Storage.    |
+| **Azure Data Lake Storage (ADLS)** | Central cloud storage for raw, cleansed, and curated datasets organized into Bronze, Silver, and Gold CONTAINERS. |
+| **Azure Databricks**        | Performs data transformation, cleansing, and enrichment using PySpark notebooks. |
+| **Azure Synapse Analytics** | Acts as the data warehouse for querying and aggregating Gold layer data efficiently for reporting. Used to create views from the tables to use for reporting      |
+| **Power BI**                | Connects to Synapse Analytics and presents data through interactive dashboards and visualizations.       |
+| **Azure Key Vault**         | Secures sensitive information such as database credentials, secrets, and keys used across services.     |
+| **Azure Entra ID (AAD)**    | Manages identity and access control using Role-Based Access Control (RBAC) to enforce security and governance. |
 
 ---
 
