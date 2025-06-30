@@ -32,7 +32,7 @@ By structuring the data transformation in layers and standardizing formats, the 
 
 ## Solution Architecture   
 
-![](screenshots/3.png)
+![](screenshots/arc.png)
 
 1. **Data Ingestion**  
    - Chinook SQL scripts were executed to create and populate the database in an on-premises SQL Server instance.
