@@ -2,7 +2,9 @@
 
 ## Project Description
 
-This project implements a modern Azure-based data engineering and analytics pipeline to extract, process, and visualize music store sales data from the Chinook SQL database. The solution leverages Azure services and Power BI to deliver actionable business insights regarding revenue, track sales, artist performance, and genre popularity across countries.
+This project implements a modern Azure-based data engineering and analytics pipeline to extract, process, and visualize music store sales data from the Chinook SQL database. The solution leverages Azure services and Power BI to deliver actionable business insights regarding revenue, track sales, artist performance, and genre popularity across countries.   
+
+![](screenshots/1.png)
 
 ### Key Features
 - End-to-end ETL pipeline using Azure-native services
@@ -23,8 +25,14 @@ This solution provides data-driven insights into digital music sales, helping st
 By structuring the data transformation in layers and standardizing formats, the data becomes highly usable and trustworthy, enabling real-time analysis through Power BI or any analytical platforms.
 
 ---
+## Data Model   
 
-## Solution Architecture
+![](screenshots/2.png)
+
+
+## Solution Architecture   
+
+![](screenshots/3.png)
 
 1. **Data Ingestion**  
    - Chinook SQL scripts were executed to create and populate the database in an on-premises SQL Server instance.
@@ -79,31 +87,63 @@ By structuring the data transformation in layers and standardizing formats, the 
    - Azure Databricks Workspace
    - Azure Synapse Analytics Workspace
    - Azure Key Vault
+   
+
+![](screenshots/4.png)
 
 ### Step 2: Database Setup
 - Execute the Chinook SQL scripts to create and populate the database in SQL Server.
+
+![](screenshots/5.png)
 
 ### Step 3: Data Ingestion
 - Create linked services and self-hosted integration runtime in ADF
 - Store sensitive information as secrets in Key Vault and create a Linked Service pointing to the key vault in ADF
 - Build pipelines to copy data from SQL Server to ADLS (Bronze layer)
 
+![](screenshots/6.png)
+![](screenshots/7.png)
+
+
 ### Step 4: Data Transformation
 - Give Storage Blob Data Contributer permission to Unity Catalog Access Connector for databricks
+
+![](screenshots/9.png)   
+
 - Create credentials and external locations pointing to ADLS containers
+
+![](screenshots/8.png)   
+
 - Create Databricks notebooks to:
   - Bronze ➝ Silver: Clean and standardize raw data
   - Silver ➝ Gold: Model business-ready data
 
+![](screenshots/10.png)
+![](screenshots/11.png)
+
 ### Step 5: Data Loading & Reporting
 - Create a stored procedure that dynamically creates a view for the tables in Gold Layer
 - Create a pipeline that gets the metadata (tablenames) and for each tablename execute the stored procedure.
+
+![](screenshots/12.png)
+![](screenshots/13.png)
+![](screenshots/14.png)   
+
 - Connect Power BI to Synapse
 - Design reports and visuals using the Chinook schema and data model
+
+![](screenshots/15.png)
+![](screenshots/16.png)   
+
 
 ### Step 6: Automation & Monitoring
 - Configure daily triggers in ADF for pipeline execution
 - Publish Power BI dashboard and set up refresh schedules
+
+![](screenshots/17.png)
+![](screenshots/18.png) 
+![](screenshots/19.png)   
+
 
 ### Step 7: End-to-End Testing
 - Insert test records in SQL Server
