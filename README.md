@@ -1,4 +1,4 @@
-## Azure End-to-End Data Engineering Pipeline: Data Modeling, Automation, and Reporting
+## Azure End-to-End Data Engineering ETL Pipeline: Data Modeling, Automation, and Reporting
 
 ## Project Description
 
